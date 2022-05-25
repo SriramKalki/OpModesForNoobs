@@ -31,7 +31,7 @@ public class FieldRelativeTeleop extends LinearOpMode {
         rightFront = hardwareMap.get(DcMotor.class,"rightFront");
         rightBack = hardwareMap.get(DcMotor.class,"rightBack");
         imu = hardwareMap.get(BNO055IMU.class, "imu");
-
+        initIMU();
         //since this is mecanum
         rightFront.setDirection(DcMotorSimple.Direction.REVERSE);
         rightBack.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -45,6 +45,12 @@ public class FieldRelativeTeleop extends LinearOpMode {
 
     }
 
+    public void initIMU(){
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+        parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
+        imu.initialize(parameters);
+
+    }
     public void drivetrain() {
         //x will calibrate field relative
         if (gamepad1.x) {
